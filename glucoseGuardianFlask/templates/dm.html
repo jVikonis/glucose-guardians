@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<style>
+	
+		:root {
+			--input-padding-x: 1.5rem;
+			--input-padding-y: .75rem;
+		}
+		
+		body {
+			background: #ef4362;
+		}
+		
+		.messagegroup {
+			overflow-y: scroll;
+			max-height: 500px; /* Probably Wrong */
+			margin: 0 200px;
+			background:#FFF; /* Background of message box */
+		}
+
+		.msg-right{
+    background:#3BA1EE;
+    padding:10px;
+    text-align:right;
+    color:#fff;
+    margin:5px;
+    max-width:70%;
+		min-width: 30%;
+    float:right;
+  margin-right: 30px;
+}
+.msg-left{
+    background:#ddd;
+    padding:10px;
+    margin:10px;
+    max-width:70%;
+		min-width: 30%;
+    float:left;
+  	margin-left: 30px;
+}
+.msg-left:before {
+   width: 0;
+    height: 0;
+    content: "";
+    top: 3px;
+    left: -24px;
+    position: relative;
+    border-style: solid;
+    border-width: 15px 0px 0px 15px;
+    border-color: #ddd transparent transparent transparent;
+   
+}	
+.msg-right:after {
+   width: 0;
+    height: 0;
+    content: "";
+    top: 3px;
+    left: 24px;
+    position: relative;
+    border-style: solid;
+    border-width: 15px 15px 0px 0px;
+    border-color: #3BA1EE transparent transparent transparent;
+  
+   
+}
+		
+	</style>
+	
+  </head>
+    <div class="wrapper">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">Glucose Guardians</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+		  <li class="nav-item active">
+            <a class="nav-link" href="#">Matches</a>
+          </li>
+		  <li class="nav-item active">
+            <a class="nav-link" href="#">Search</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+           <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="content">
+        <div class="container mt-5">
+					<div class="jumbotron mb-0 pb-0 rounded-0">
+							<div class="text-center">
+								<img src="conor.png" class="rounded-circle mx-auto pt-2 pb-1" width="60"></img>
+								<h4 class="unmsg-title pb-0">Conor</h4>
+							</div>
+						<hr/>
+					<div id="messagegroup">
+						<div class="row">
+							<div class="col">
+									<div class="msg-left">Their Message</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+									<div class="msg-right">My Message</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+									<div class="msg-left"><small>Super Long Heartfelt Message, You're the one. I already planned
+										the wedding out.</small>
+									</div>
+							</div> 
+						</div>
+						<div class="row">
+								<div class="col">
+										<div class="msg-right">K</div>
+							</div>
+							</div>
+					</div>
+        </div>
+    </main><!-- /.container -->
+    </div>
+    <footer>
+
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
