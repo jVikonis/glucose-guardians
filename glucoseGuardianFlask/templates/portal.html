@@ -20,35 +20,25 @@
 		body {
 			background: #ef4362;
 		}
-		
-		#messagegroup {
-			overflow-y: scroll;
-			height:75%; /* Probably Wrong */
-	
-		}
-		.msg-right{
-	font-size: 13px;
-    background:#3BA1EE;
-    padding:10px;
-    text-align:right;
-    color:#fff;
-    margin:5px;
-    max-width:70%;
-    float:right;
-border-radius: 2.5em 2.5em 1em 2.5em;
-}
-.msg-left{
-font-size: 13px;
-    background:#ddd;
-    padding:10px;
-    margin:10px;
-    max-width:70%;
-
-    float:left;
-border-radius: 2.5em 2.5em 2.5em 1em;
+		.btn-circle.btn-xl {
+    width: 75px;
+    height: 75px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
 }
 
-		
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
 	</style>
 	
   </head>
@@ -78,47 +68,38 @@ border-radius: 2.5em 2.5em 2.5em 1em;
     </nav>
     <main role="main" class="content">
         <div class="container mt-5">
-					<div class="jumbotron mb-0 pb-0 rounded-0" style="height: 100vh;">
-							<div class="text-center">
-								<img src="conor.png" class="rounded-circle mx-auto pt-2 pb-1" width="60"></img>
-								<h4 class="unmsg-title pb-0">Conor</h4>
-							</div>
-						<hr/>
-					<div id="messagegroup">
-						<div class="row">
-							<div class="col">
-									<div class="msg-left">Their Message</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-									<div class="msg-right">My Message</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-									<div class="msg-left">Super Long Heartfelt Message, You're the one. I already planned
-										the wedding out.
-									</div>
-							</div> 
-						</div>
-						<div class="row">
-								<div class="col">
-										<div class="msg-right">K</div>
-							</div>
-							</div>
-					</div>
-					<div class="row">
-						<form id="msg" autocomplete="off">
-					<div class="form-row">
-						<div class="col-10 pl-4">
-							<input type="text" id="message" name="message" class="form-control" required>
-						</div>
-						<div class="col-2">
-							<button class="btn btn-primary btn-success" type="submit">Send</button>
+				<div class="jumbotron mb-0 pb-0 rounded-0" style="height: 94vh;">
+					<div class="row pt-3">
+						<div class="col-6 offset-3 text-center">
+							<img class="img-rounded" src="conor.png" width="128">
+							<h2>Conor<h2>
 						</div>
 					</div>
-        </div>
+					<hr>
+					<div class="row pt-5">
+						<div class="col-1 offset-1">
+							<a class="btn btn-circle btn-xl btn-danger" href="{{url_for('messages')}}"><i class="fas fa-lg fa-heart pt-3"></i></a>
+						<h5>Matches</h5>
+						</div>
+						<div class="col-1 offset-5">
+							<a class="btn btn-circle btn-xl btn-success" href="{{url_for('edit')}}"><i class="fas fa-user-cog fa-lg pt-3"></i></a>
+							<h5>Settings</h5>
+						</div>
+					</div>
+					<div class="row text-center" style="padding-top: 5em;">
+						<div class="col-1 offset-1">
+							<a class="btn btn-circle btn-xl btn-info" href="{{url_for('pictures')}}"><i class="fas fa-lg fa-camera pt-3"></i></a>
+						<h5>Pictures</h5>
+					</div>
+					<div class="col-2 offset-5">
+						<a class="btn btn-circle btn-xl btn-success" href="{{url_for('logoff')}}"><i class="fas fa-sign-out-alt fa-lg pt-3"></i></a>
+						<h5>Sign&nbspOut</h5>
+					</div>
+
+				</div>
+	</div>
+							
+					
     </main><!-- /.container -->
     </div>
     <footer>
@@ -132,39 +113,6 @@ border-radius: 2.5em 2.5em 2.5em 1em;
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
-<script>
-$("#msg").submit(function (event) {
-            event.preventDefault();
-            var formData = $('#msg').serialize();
-
-		addMsg($("#message").val(), true);
-/*
-            $.ajax({
-                type: 'POST',
-                url: '{{ url_for('SendMsg') }}',
-                data: formData
-            })
-                .done(function (data) {
-                    if (data["success"] === true) {
-                        addMsg($("#message").val(), true);
-                    }
-                    else {
-                        alert("Message failed to send.");
-                    }
-                });*/
-	});
-	function addMsg(message, own) {
-		var cls = ""
-		if(own) {
-			cls = "msg-right";
-			$("#message").val("");
-		}
-		else {
-			cls = "msg-left";
-		}
-		$("#messagegroup").append('<div class="row"><div class="col"><div class="' + cls + ' ">' + message + '</div></div></div>');
-	}
-</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>

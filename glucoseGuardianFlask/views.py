@@ -137,8 +137,8 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/swipe/getpotentialsoulmate', methods = ["POST"])
-def getPotentialSoulmates():
+@app.route('/swipe/getpotentialsoulmate')
+def swipe():
     """Renders the swipe page"""
     current_user.distance()
     potential = User.query.filter_by(current_user.preference == "both" or current_user.preference == User.gender).all()
