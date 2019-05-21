@@ -8,6 +8,7 @@ from flask_login import current_user, login_user, logout_user, LoginManager, log
 from sqlalchemy import func, desc
 from . import app
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash
 from .models import *
 import hashlib
 import os
@@ -18,6 +19,11 @@ ALLOWED_EXT = ["jpg", "jpeg", "png"]
 
 def is_pic(filename):
     return '.' in filename and filename.split(".", 1)[1].lower() in ALLOWED_EXT
+
+def _min(one, two):
+    if one < two:
+        return one
+    return two
 
 M_TO_INT = {"Jan": 1,
             "Feb": 2,
@@ -65,19 +71,23 @@ def PerformRegister():
     u = User()
     try:
         u.email = request.form["name"]
-        u.password = request.form["password"]
+        u.password = generate_password_hash(request.form["password"])
         u.name = request.form["name"]
         u.preference = request.form["preference"]
         u.gender = request.form["gender"]
         u.bio = request.form["bio"]
         u.birthday = datetime(int(request.form["year"]), M_TO_INT[request.form["month"]], int(request.form["day"]))
+        u.min = _min(int(request.form["year"]) - 40, 18)
+        u.max = int(request.form["year"]) + 20
+        u.lat = float(request.form["lat"])
+        u.long = float(request.form["long"])
         User.query.filter(func.lower(User.email) == func.lower(u.email)).first()
         if User.query.filter(func.lower(User.email) == func.lower(u.email)).first() is not None:
-            return jsonify(success = False, reason="Email already in use")
+            return jsonify(success = False, reason="This email is already in use.")
 
         file = request.files["picture"] 
         if not is_pic(file.filename):
-            return jsonify(success = False, reason="Invalid file")
+            return jsonify(success = False, reason="Invalid picture, it must be a png or a jpg.")
         filename = secure_filename(file.filename)
         fname = os.path.join(PIC_PATH, hashlib.md5((u.email + filename).encode("utf-8")).hexdigest() + ".png")
         file.save(fname)

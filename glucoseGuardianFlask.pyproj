@@ -44,6 +44,12 @@
     <Folder Include="glucoseGuardianFlask\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="glucoseGuardianFlask\templates\conor.png" />
+    <Content Include="glucoseGuardianFlask\templates\dm.html" />
+    <Content Include="glucoseGuardianFlask\templates\login.html" />
+    <Content Include="glucoseGuardianFlask\templates\messages.html" />
+    <Content Include="glucoseGuardianFlask\templates\register.html" />
+    <Content Include="glucoseGuardianFlask\templates\swipe.html" />
     <Content Include="requirements.txt" />
     <Content Include="glucoseGuardianFlask\static\content\bootstrap.css" />
     <Content Include="glucoseGuardianFlask\static\content\bootstrap.min.css" />
