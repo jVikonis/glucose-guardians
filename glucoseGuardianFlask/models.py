@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin
 from . import db, login
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 @login.user_loader
@@ -22,6 +22,14 @@ class User(db.Model, UserMixin):
     preference = db.Column(db.String(12), nullable = False)
     min = db.Column(db.Integer, nullable = False)
     max = db.Column(db.Integer, nullable = False)
+    lat = db.Column(db.Float, nullable = False)
+    long = db.Column(db.Float, nullable = False)
+
+    def set_password(self, unhashed : str):
+        password = generate_password_hash(str)
+
+    def check_password(self, unhashed : str):
+        return check_password_hash(password, unhashed)
 
     pictures = db.relationship('Picture', backref = 'user', lazy = True)
 
