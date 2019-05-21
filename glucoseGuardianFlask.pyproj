@@ -28,7 +28,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="glucoseGuardianFlask\models.py" />
+    <Compile Include="glucoseGuardianFlask\models.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
     <Compile Include="glucoseGuardianFlask\__init__.py" />
     <Compile Include="glucoseGuardianFlask\views.py" />

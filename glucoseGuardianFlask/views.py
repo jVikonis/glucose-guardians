@@ -136,3 +136,15 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+@app.route('/swipe/getpotentialsoulmate')
+def swipe():
+    """Renders the swipe page"""
+
+
+    return render_template(
+        'swipe.html',
+        title = 'Swiping',
+        message = 'Your application soulmate finder page'
+        )
+
