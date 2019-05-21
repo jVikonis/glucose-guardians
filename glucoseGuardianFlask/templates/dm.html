@@ -21,58 +21,33 @@
 			background: #ef4362;
 		}
 		
-		.messagegroup {
+		#messagegroup {
 			overflow-y: scroll;
-			max-height: 500px; /* Probably Wrong */
-			margin: 0 200px;
-			background:#FFF; /* Background of message box */
+			height:75%; /* Probably Wrong */
+	
 		}
-
 		.msg-right{
+	font-size: 13px;
     background:#3BA1EE;
     padding:10px;
     text-align:right;
     color:#fff;
     margin:5px;
     max-width:70%;
-		min-width: 30%;
     float:right;
-  margin-right: 30px;
+border-radius: 2.5em 2.5em 1em 2.5em;
 }
 .msg-left{
+font-size: 13px;
     background:#ddd;
     padding:10px;
     margin:10px;
     max-width:70%;
-		min-width: 30%;
+
     float:left;
-  	margin-left: 30px;
+border-radius: 2.5em 2.5em 2.5em 1em;
 }
-.msg-left:before {
-   width: 0;
-    height: 0;
-    content: "";
-    top: 3px;
-    left: -24px;
-    position: relative;
-    border-style: solid;
-    border-width: 15px 0px 0px 15px;
-    border-color: #ddd transparent transparent transparent;
-   
-}	
-.msg-right:after {
-   width: 0;
-    height: 0;
-    content: "";
-    top: 3px;
-    left: 24px;
-    position: relative;
-    border-style: solid;
-    border-width: 15px 15px 0px 0px;
-    border-color: #3BA1EE transparent transparent transparent;
-  
-   
-}
+
 		
 	</style>
 	
@@ -103,7 +78,7 @@
     </nav>
     <main role="main" class="content">
         <div class="container mt-5">
-					<div class="jumbotron mb-0 pb-0 rounded-0">
+					<div class="jumbotron mb-0 pb-0 rounded-0" style="height: 100vh;">
 							<div class="text-center">
 								<img src="conor.png" class="rounded-circle mx-auto pt-2 pb-1" width="60"></img>
 								<h4 class="unmsg-title pb-0">Conor</h4>
@@ -122,8 +97,8 @@
 						</div>
 						<div class="row">
 							<div class="col">
-									<div class="msg-left"><small>Super Long Heartfelt Message, You're the one. I already planned
-										the wedding out.</small>
+									<div class="msg-left">Super Long Heartfelt Message, You're the one. I already planned
+										the wedding out.
 									</div>
 							</div> 
 						</div>
@@ -132,6 +107,16 @@
 										<div class="msg-right">K</div>
 							</div>
 							</div>
+					</div>
+					<div class="row">
+						<form id="msg" autocomplete="off">
+					<div class="form-row">
+						<div class="col-10 pl-4">
+							<input type="text" id="message" name="message" class="form-control" required>
+						</div>
+						<div class="col-2">
+							<button class="btn btn-primary btn-success" type="submit">Send</button>
+						</div>
 					</div>
         </div>
     </main><!-- /.container -->
@@ -147,6 +132,39 @@
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
+<script>
+$("#msg").submit(function (event) {
+            event.preventDefault();
+            var formData = $('#msg').serialize();
+
+		addMsg($("#message").val(), true);
+/*
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for('SendMsg') }}',
+                data: formData
+            })
+                .done(function (data) {
+                    if (data["success"] === true) {
+                        addMsg($("#message").val(), true);
+                    }
+                    else {
+                        alert("Message failed to send.");
+                    }
+                });*/
+	});
+	function addMsg(message, own) {
+		var cls = ""
+		if(own) {
+			cls = "msg-right";
+			$("#message").val("");
+		}
+		else {
+			cls = "msg-left";
+		}
+		$("#messagegroup").append('<div class="row"><div class="col"><div class="' + cls + ' ">' + message + '</div></div></div>');
+	}
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
