@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -258,10 +258,10 @@ fieldset[disabled] .btn-pink.active {
                                     </div>
                                     <div class="btn-group-toggle btn-group btn-group-lg ml-2" data-toggle="buttons">
                                         <label class="btn btn-primary pr-4">
-                                            <input type="radio" name="gender" class="no-rad" value="male"> Male
+                                            <input type="radio" name="gender" id="gendermale" class="no-rad" value="male"> Male
                                         </label>
                                         <label class="btn btn-pink pr-5">
-                                            <input type="radio" name="gender" class="no-rad" value="female"> Female
+                                            <input type="radio" name="gender"id="genderfemale" class="no-rad" value="female"> Female
                                         </label>
                                     </div>
                                 </div>
@@ -308,19 +308,29 @@ fieldset[disabled] .btn-pink.active {
                                     </div>
                                     <div class="btn-group-toggle btn-group btn-group-lg ml-2" data-toggle="buttons">
                                         <label class="btn btn-primary ml-4 pr-4">
-                                            <input type="radio" name="preference" class="no-rad" value="male"> Male
+                                            <input type="radio" name="preference" id="prefmale" class="no-rad" value="male"> Male
                                         </label>
                                         <label class="btn btn-pink pr-3">
-                                            <input type="radio" name="preference" class="no-rad" value="female"> Female
+                                            <input type="radio" name="preference" id="preffemale" class="no-rad" value="female"> Female
                                         </label>
                                         <label class="btn btn-info pr-4">
-                                            <input type="radio" name="preference" class="no-rad" value="both"> Both
+                                            <input type="radio" name="preference" id="prefboth" class="no-rad" value="both"> Both
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-label-group">
                                     <textarea type="text" rows=3 name="bio" id="bio" class="form-control" placeholder="" required></textarea>
                                     <label for="bio">Biography</label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-xs-2"><<label for="min">Minimum Age</label></div>
+                                    <div class="col-xs-9"><input type="range" name="min" class="custom-range" min="18" max="100" value="{{current_user.min}}" /></div>
+                                    <div class="col-xs-1"><small id="minAge">{{current_user.min}}</small></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-xs-2"><<label for="min">Minimum Age</label></div>
+                                    <div class="col-xs-9"><input type="range" name="min" class="custom-range" min="18" max="100" value="{{current_user.max}}" /></div>
+                                    <div class="col-xs-1"><small id="minAge">{{current_user.max}}</small></div>
                                 </div>
                                 <hr class="my-4">
                                 <button class="btn btn-lg btn-primary btn-block btn-success register mb-3" type="submit">Sign Up</button>
@@ -380,12 +390,17 @@ fieldset[disabled] .btn-pink.active {
                     }
                 })
             });
+
+            $("#min").on("change")
             
 
-            function onGetPos(position) {
-                $("#lat").val(position.coords.latitude)
-                $("#long").val(position.coords.longitude);
-            }
+            $("#month option:eq({{current_user.birthday.month}})").prop("selected", true);
+
+            $("#day option:eq({{current_user.birthday.day}})").prop("selected", true);
+
+            $("#year option:eq({{year - current_user.birthday.year + 1}})").prop("selected", true);
+
+            $("#gender{{current_user.gender}}").prop("checked", true);
 		</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

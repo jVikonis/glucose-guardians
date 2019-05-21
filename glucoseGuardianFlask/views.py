@@ -43,18 +43,28 @@ M_TO_INT = {"Jan": 1,
 def inject_year():
     return { "year": datetime.utcnow().year }
 
-@app.route("/swipe")
+@app.route("/DM/<int>")
+def DM(other_user):
+    u = User.query.filter(User.id == other_user).first()
+    # Query messages from u to current_user, as well as current_user to u
+
+
+@app.route("/Swipe")
 def swipe():
     return render_template("swipe.html")
 
-@app.route("/login")
+@app.route("/Login")
 def login():
     return render_template("login.html")
 
 @app.route("/")
-@app.route("/register")
+@app.route("/Register")
 def register():
     return render_template("register.html")
+
+@app.route("/Edit")
+def edit():
+    return render_template("edit.html")
 
 @app.route("/PerformLogin", methods=["POST"])
 def PerformLogin():
@@ -106,39 +116,24 @@ def PerformRegister():
         import traceback
         print(traceback.format_exc())
 
+@app.route('/PerformEdit', methods=["POST"])
+def PerformEdit():
+    try:
+        current_user.name = request.form["name"]
+        current_user.preference = request.form["preference"]
+        current_user.gender = request.form["gender"]
+        current_user.bio = request.form["bio"]
+        current_user.birthday = datetime(int(request.form["year"]), M_TO_INT[request.form["month"]], int(request.form["day"]))
+        current_user.min = _min(int(request.form["year"]) - 40, 18)
+        current_user.max = int(request.form["year"]) + 20
+        current_user.save()
+        return render_template(url_for("portal"))
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc())
 
-@app.route('/adw')
-@app.route('/home')
-def home():
-    """Renders the home page."""
-    return render_template(
-        'index.html',
-        title='Home Page',
-        year=datetime.now().year,
-    )
-
-@app.route('/contact')
-def contact():
-    """Renders the contact page."""
-    return render_template(
-        'contact.html',
-        title='Contact',
-        year=datetime.now().year,
-        message='Your contact page.'
-    )
-
-@app.route('/about')
-def about():
-    """Renders the about page."""
-    return render_template(
-        'about.html',
-        title='About',
-        year=datetime.now().year,
-        message='Your application description page.'
-    )
-
-@app.route('/swipe/getpotentialsoulmate')
-def swipe():
+@app.route('/swipe/GetPotentialSoulmates')
+def GetPotentialSoulmates():
     """Renders the swipe page"""
     current_user.distance()
     potential = User.query.filter_by(current_user.preference == "both" or current_user.preference == User.gender).all()
