@@ -137,8 +137,8 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/swipe/getpotentialsoulmate')
-def swipe():
+@app.route('/swipe/GetPotentialSoulmate')
+def get_soul_mates():
     """Renders the swipe page"""
 
 

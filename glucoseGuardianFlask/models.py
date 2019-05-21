@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
         password = generate_password_hash(str)
 
     def check_password(self, unhashed : str):
-        return check_password_hash(password, unhashed)
+        return check_password_hash(self.password, unhashed)
 
     pictures = db.relationship('Picture', backref = 'user', lazy = True)
 
