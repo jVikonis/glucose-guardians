@@ -127,14 +127,10 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/swipe/getpotentialsoulmate')
-def swipe():
+@app.route('/swipe/getpotentialsoulmate', methods = ["POST"])
+def getPotentialSoulmates():
     """Renders the swipe page"""
-
-
-    return render_template(
-        'swipe.html',
-        title = 'Swiping',
-        message = 'Your application soulmate finder page'
-        )
+    current_user.distance()
+    potential = User.query.filter_by(current_user.preference == "both" or current_user.preference == User.gender).all()
+    return jsonify(potential)
 
